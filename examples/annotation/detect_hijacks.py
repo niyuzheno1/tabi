@@ -61,8 +61,8 @@ if __name__ == "__main__":
         except:
             raise ValueError("invalid input options (use format key=value)")
 
-    input = choose_input(args.input)
-    kwargs = input(args.collector, **input_kwargs)
+    inputx = choose_input(args.input)
+    kwargs = inputx(args.collector, **input_kwargs)
 
     if args.irr_ro_file is not None:
         kwargs["irr_ro_file"] = args.irr_ro_file

@@ -76,7 +76,7 @@ def mabo_fork(filename, output=None):
     if not os.path.exists(filename):
         message = "mabo_fork(): MRT file does not exist: %s" % filename
         critical_error(message)
-
+    print(filename)
     # Call the external command
     try:
         if output is None:
@@ -85,7 +85,7 @@ def mabo_fork(filename, output=None):
             output = open(output, "w")
         sp = subprocess.Popen([MABO_PATH, "dump", filename],
                               stdout=output, stderr=subprocess.PIPE)
-    except OSError, e:
+    except OSError as e:
         critical_error("mabo_fork() %s: %s" % (MABO_PATH, e))
     finally:
         if output != subprocess.PIPE:
@@ -176,9 +176,10 @@ def check_ris_filenames(files, sort=True):
 
     # Sort based on the key and return the list
     if sort:
-        to_sort.sort(lambda x, y: cmp(x[0], y[0]))
-
-    return map(lambda (x, y): y, to_sort), invalid_filenames
+        # key=(lambda x: cmp(x[0][0], x[1][0]))
+        to_sort.sort()
+    # map(lambda (x, y): y, to_sort)
+    return map(lambda x: x[1], to_sort), invalid_filenames
 
 
 def critical_error(message):

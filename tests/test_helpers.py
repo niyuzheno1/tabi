@@ -30,7 +30,7 @@ class TestHelpers:
         try:
           parse_ases_ini(non_existing_filename)
           assert False
-        except Exception, e:
+        except Exception as e:
           if not isinstance(e, CriticalException):
             assert False
 
@@ -41,7 +41,7 @@ class TestHelpers:
         try:
           parse_ases_ini(filename)
           assert False
-        except Exception, e:
+        except Exception as e:
             pass
 
     def test_split_ases_list(self):
@@ -67,10 +67,10 @@ class TestHelpers:
             try:
               get_packed_addr(prefix, plen)
               assert False
-            except Exception, e:
+            except Exception as e:
               if not isinstance(e, CriticalException):
                 assert False
-              print e
+              print(e)
 
         # IPv4 prefixes
         invalid_ipv4_prefixes = [ ("192.168.0.1", 69), ("192.168.0.1", -1), ("192.168.0.0/bgp", None) ]
@@ -78,10 +78,10 @@ class TestHelpers:
             try:
               get_packed_addr(prefix, plen)
               assert False
-            except Exception, e:
+            except Exception as e:
               if not isinstance(e, CriticalException):
                 assert False
-              print e
+              print(e)
 
         prefix = "192.168.0.1/24"
         if get_packed_addr(prefix) != ("\xc0\xa8\x00\x01", 24):
@@ -93,14 +93,14 @@ class TestHelpers:
             try:
               get_packed_addr(prefix, plen)
               assert False
-            except Exception, e:
+            except Exception as e:
               if not isinstance(e, CriticalException):
                 assert False
-              print e
+              print(e)
 
         prefix = "2001:db8::/48"
         if get_packed_addr(prefix) != ("\x20\x01\r\xb8\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 48):
-            print get_packed_addr(prefix)
+            print(get_packed_addr(prefix))
             assert False
 
     def test_get_as_origin(self):
@@ -112,8 +112,8 @@ class TestHelpers:
             try:
               get_as_origin(as_path)
               assert False
-            except Exception, e:
-              print e
+            except Exception as e:
+              print(e)
               if not isinstance(e, CriticalException):
                 assert False
 
@@ -125,7 +125,7 @@ class TestHelpers:
             try:
               if get_as_origin(as_path) != result:
                 assert False
-            except Exception, e:
+            except Exception as e:
               if not isinstance(e, CriticalException):
                 assert False
-              print e
+              print(e)
